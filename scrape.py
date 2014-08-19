@@ -1,5 +1,7 @@
+from getpass import getpass
+from re import findall
 from robobrowser import RoboBrowser
-import re
+from sys import argv
 
 
 def get_webdav_urls(username, password):
@@ -32,7 +34,7 @@ def get_webdav_urls(username, password):
         href = course_link.attrs['href']
         if '~' in href:
             continue
-        course_ids.append(re.findall('\/[^\/]+$', href)[0][1:])
+        course_ids.append(findall('\/[^\/]+$', href)[0][1:])
 
     # get the webDAV url from every course
 
@@ -63,8 +65,15 @@ def get_webdav_urls(username, password):
 
 if __name__ == '__main__':
 
-    username = 'YOUR_USERNAME'
-    password = 'YOUR_PASSWORD'
+    if len(argv) < 2:
+        print 'Please specify an output file.'
+        exit(1)
+
+    username = raw_input('Uniqname: ')
+    password = getpass()
+    output_path = argv[1]
 
     webdav_urls = get_webdav_urls(username, password)
-    print webdav_urls
+    output_file = open(output_path, 'w')
+    for url in webdav_urls:
+        print >> output_file, url

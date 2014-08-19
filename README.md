@@ -1,4 +1,6 @@
-this scrapes all of your CTools Resources if you're a University of Michigan student.
+for University of Michigan students.
+
+this scrapes all the WebDAV urls for your CTools Resources pages so you can download them. for the moment, it doesn't actually scrape the files, so you'll have to do it yourself. i'm lazy :(
 
 get set up:
 
@@ -8,6 +10,4 @@ get set up:
 
 run it:
 
-    python scrape.py youruniqname yourpassword
-
-note: this script will leave your umich credentials in your bash/zsh history. sorry
+    python scrape.py
